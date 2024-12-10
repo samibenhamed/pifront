@@ -1,0 +1,179 @@
+<app-header></app-header>
+
+<br><br><br>
+<!-- Common Fields  -->
+<div class="container">
+
+<form action="" [formGroup]="updateFromGroup" (ngSubmit)="onSubmit()" >
+    <!-- FristName  -->
+    <br>
+    <label for="firstName">Prénom : </label>
+    <input type="text" name="firstName"  formControlName="firstName" [class.invalid]="hasRequiredError('firstName') ">
+    @if ( hasRequiredError('firstName')) {
+        <br>
+        <span class="error-message"> Ce champ est obligatoire </span>
+    }
+    <br>
+    <!--  -->
+
+    <!-- Last Name  -->
+    <label for="lastName"> Nom de famille : </label>
+    <input type="text" name="lastName"  formControlName="lastName" [class.invalid]="hasRequiredError('lastName') ">
+    @if ( hasRequiredError('lastName')) {
+        <br>
+        <span class="error-message"> Ce champ est obligatoire </span>
+    }
+    <br>
+    <!--  -->
+
+
+    <!-- Titre  -->
+     <label for="firstName">Titre : </label>
+     <input type="text" name="title"  formControlName="title"  >
+     <br>
+    <!--  description -->
+     <label for="description">Description : </label>
+     <br>
+     <textarea name="" id="" cols="50" rows="10"formControlName="description" ></textarea>
+     <br>
+    <!--  -->
+
+    <!--Phone  -->
+     <label for="phone">Numéro de téléphone  : </label>
+    <input type="tel" name="phone"  formControlName="phone" [class.invalid]="hasRequiredError('phone') ">
+     @if ( hasRequiredError('phone')) {
+        <br>
+        <span class="error-message"> Ce champ est obligatoire </span>
+     }
+       <br>
+       <!--  -->
+
+    <!-- Email  -->
+    <label for="email">Email : </label>
+    <input type="email" formControlName="email" [class.invalid]="isInvalid('email')">
+    <br>
+    @if ( hasRequiredError('email')) {
+        <span class="error-message"> Ce champ est obligatoire </span>
+        <br>
+    }
+    @if ( hasInvalidEmailError('email')) {
+        <span class="error-message">  Format d'email invalide  </span>
+        <br>
+    }
+    <!--   -->
+    <!-- PassWord  -->
+    <label for="passWord">Mot de passe : </label>
+    <input type="passWord" formControlName="passWord" [class.invalid]="isInvalid('passWord')">
+    <br>
+    @if ( hasRequiredError('passWord')) {
+        <span class="error-message"> Ce champ est obligatoire </span>
+    }
+    @if ( hasInvalidPassWordError('passWord')) {
+        <span class="error-message"> la longueur minimale du mot de passe est de 8 </span>
+    }
+    <br>
+    <!--  -->
+   
+    <!--  birth Date -->
+   <label for="birthDate">Date de naissance :</label>
+   <input type="date" formControlName="birthDate" [class.invalid]="isInvalid('birthDate')">
+   <br>
+   @if ( hasRequiredError('birthDate')) {
+       <span class="error-message"> Ce champ est obligatoire </span>
+   }
+   <!--  -->
+
+   <!-- Gender  -->
+   <div>
+    <p>Genre :</p>
+    <input type="radio"  value ="Female" id="" formControlName="gender" [checked]="accountDetails.sex=='Female'" > <span> Femme </span>
+    <input type="radio" name="gender" id="" value="Male" formControlName="gender"  [checked]="accountDetails.sex=='Male'" >  <span>Homme </span>
+   </div>
+    <br>
+    
+    
+   <!-- Origine  -->
+    <label for="origin">Origine : </label>
+    <select name="" id="" formControlName="origin">
+        @for (item of locations; track $index) {
+            <option [value]="item.id"> {{item.country}} - {{item.region}} - {{item.city}}</option>
+        }
+    </select>
+    <br>
+
+    <!-- Lk Url   -->
+    <label for="lkURL">URL Linkedin  : </label>
+    <input type="text" name="lkURL"  formControlName="lkURL"  >
+    <br>
+
+    
+    <!-- PortUrl   -->
+    <label for="portURL">URL  portfolio  : </label>
+    <input type="text" name="portURL"  formControlName="portURL"  >
+    <br>
+
+    <!-- pswsURL -->
+    <label for="pswsURL">URL site Web personnel: </label>
+    <input type="text" name="pswsURL"  formControlName="pswsURL"  >
+    <br>
+
+    <!-- User Spesific Fileds  -->
+    @if (accountType=="User") {
+        <!-- SatisfactionLevel  -->
+        <div [class.invalid]=" updateFromGroup.get('satisfactionLevel')?.value=='0' " >
+            <p> Niveau de satisfaction </p>
+            <input type="radio" formControlName="satisfactionLevel" value="1"> <span>1</span>
+            <input type="radio" formControlName="satisfactionLevel" value="2"> <span>2</span>
+            <input type="radio" formControlName="satisfactionLevel" value="3"> <span>3</span>
+            <input type="radio" formControlName="satisfactionLevel" value="4"> <span>4</span>
+            <input type="radio" formControlName="satisfactionLevel" value="5"> <span>5</span>
+            @if ( updateFromGroup.get('satisfactionLevel')?.value=='0') {
+                <br>
+                <span class="error-message"> Ce champ est obligatoire </span>
+             }
+        </div>
+
+        <!--  Enrolment Date -->
+        <label for="promotion">Date d'inscription :</label>
+        <input type="date" formControlName="promotion" [class.invalid]="isInvalid('promotion')">
+        <br>
+        @if ( hasRequiredError('promotion') ) {
+            <span class="error-message"> Ce champ est obligatoire </span>
+        }
+        <!--  -->
+        <!-- Graduation Date  -->
+        <label for="graduationDate">Date d'obtention du diplôme :</label>
+        <input type="date" formControlName="graduationDate" [class.invalid]="invalidGraduationDate()">
+        @if ( invalidGraduationDate()) {
+            <br>
+            <span class="error-message"> La date d'obtention du diplôme ne peut pas être avant à la date d'inscription </span>
+        }
+        <br>
+        <!-- Type Bac  -->
+        <!-- updateFromGroup -->
+        <label for="bacType">  Type Bac   : </label>
+        <select name="bacType" formControlName="bacType" 
+        [class.invalid]=" hasRequiredError('bacType') " 
+        >
+            <option   name="bacType"  value="Scientifique" >Scientifique</option>
+            <option   name="bacType"  value="Littéraire" >Littéraire</option>
+            <option   name="bacType"  value="Economique et sociale" >Economique et sociale</option>
+            <option   name="bacType"  value="Sportif" >Sportif</option>
+          </select>
+          
+        @if (   hasRequiredError('bacType') ) {
+          <br>
+         <span class="error-message"> Ce champ est obligatoire </span>
+    
+        }
+          <br><br>
+        
+    }
+
+
+
+
+
+ <input type="submit" value="Changer">
+</form>
+</div>

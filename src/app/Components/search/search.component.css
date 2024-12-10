@@ -1,0 +1,314 @@
+
+/* Search Section  */
+.search-section {
+    background-color: LightBlue    ;
+    padding: 20px; /* Add padding for spacing */
+    width: 100%; /* Set width to span the entire page */
+    box-sizing: border-box; /* Include padding in the width */
+}
+
+.search-form {
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center child elements horizontally */
+    align-items: center;
+}
+
+.search-form input[type="text"] {
+    padding: 8px 16px; /* Adjust padding as needed */
+    margin-right: 10px; /* Adjust margin as needed */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 4px; /* Add border radius */
+    font-size: 14px; /* Adjust font size as needed */
+    width: 75%; /* Set wider width for the input */
+}
+
+.search-form input[type="submit"],
+.search-form button {
+    padding: 8px 16px; /* Adjust padding as needed */
+    margin-right: 10px; /* Adjust margin as needed */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 4px; /* Add border radius */
+    font-size: 14px; /* Adjust font size as needed */
+    background-color: #007bff; /* Change background color */
+    color: #fff; /* Change text color */
+    cursor: pointer; /* Add cursor pointer */
+}
+
+.search-form input[type="submit"]:hover,
+.search-form button:hover {
+    background-color: #0056b3; /* Change background color on hover */
+}
+
+/* Optionally, style the "Add User" button differently */
+.search-form button.add-user {
+    background-color: #28a745; /* Change background color */
+}
+
+.search-form button.add-user:hover {
+    background-color: #218838; /* Change background color on hover */
+}
+
+
+
+
+/* Satisfaction Level  */
+
+.satisfaction-form {
+    padding: 20px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    justify-content: center;
+
+
+}
+
+.satisfaction-form p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.satisfaction-form input[type="radio"] {
+    margin-right: 10px;
+}
+
+.satisfaction-form input[type="submit"] {
+    margin-top: 10px;
+    padding: 8px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.satisfaction-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Filter Box  */
+/* Style for the entire filter box */
+.filter-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Style for filter sections */
+.filter-section {
+    margin-bottom: 10px;
+}
+
+/* Style for labels */
+.filter-section label {
+    font-weight: bold;
+}
+
+/* Style for radio buttons and checkboxes */
+.filter-section input[type="radio"],
+.filter-section input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Style for select dropdowns */
+.filter-section select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style for buttons */
+.filter-section button {
+    margin-left: 10px;
+    /* background-color: #ddd; */
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Style for form inputs */
+.filter-section input[type="text"] {
+    width: 80%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style for the add button */
+.filter-section input[type="submit"] {
+    padding: 5px 10px;
+    margin-left: 10px ;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Style for selected skills */
+.filter-section p {
+    font-weight: bold;
+}
+
+/* Style for selected skills list */
+.filter-section span {
+    margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  Accounts Card  */
+
+
+
+
+.cards-box{
+    background-color: AliceBlue;
+    width: 100%;
+    height: 600px;
+    /* box-sizing: border-box; */
+    overflow: auto;
+}
+
+mat-grid-list{
+    /* border: red solid 1px; */
+    padding-left: 5px;
+    /* height: 100%; */
+}
+
+.card{
+    border: 1px solid CornflowerBlue ;
+    width: 100%;
+    height: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius:10px ;
+    box-shadow: LightBlue 5px 0px 24px;
+
+
+    /* overflow: scroll; */
+    margin-top: 0;
+}
+.card:hover{
+    transform: scale(1.1); 
+}
+mat-card-header{
+    background-color: #ADD8E6;
+    border-radius:10px ;
+
+}
+
+mat-card-content{
+    background-color: AliceBlue;
+    height: 100%;
+    border-radius:10px ;
+    
+
+}
+
+.user-img{
+    /* width: 100px; */
+    width: 100%;
+    height: 200px;
+}
+
+.head-img{
+    margin: 0px;
+    width: 50px;
+    border-radius: 50% ;
+    border: 1px solid black;
+}
+
+
+mat-card-actions{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: Azure;
+    border-radius:10px ;
+
+}
+.view-profile-button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.delete-button{
+    background-color: Crimson;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    
+}
+.skills-box{
+    width: 100%;
+    border: black solid 1px;
+    height: 100px;
+    overflow: auto;
+    border-radius: 10px;
+}
+.skill{
+    /* border: solid 1px #007bff; */
+    border-radius: 10%;
+    margin-left: 5px;
+    padding: 5px 10px 5px 10px ;
+    background-color:LightCyan;
+    box-sizing: border-box;
+    border: black solid 1px;
+    display: inline-flex;
+}
+.card-title{
+    font-size: large;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

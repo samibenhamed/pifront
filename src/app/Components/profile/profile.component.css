@@ -1,0 +1,93 @@
+/* img{
+    width: 100px;
+} */
+
+.diploma-box{
+    border : 1px solid black ;
+}
+
+
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+
+
+/*  User Info */
+.update-account{
+    margin-left: 400px;
+    font-weight: bold;
+    font-size: x-large;
+}
+.update-account:hover{
+    transform: scale(1.5);
+    color: black;
+}
+
+
+
+/* Skills Section  */
+.add-btn{
+    margin-left: 220px;
+    font-size: xx-large;
+}
+.add-btn:hover{
+    color: black;
+    transform: scale(1.5);
+}
+
+.skil-update{
+    margin-left: 360px;
+}
+.skil-update:hover{
+    transform: scale(1.5);
+    color: black;
+}
+
+.skill-delete:hover{
+    transform: scale(1.5);
+    color: black;
+}
+
+.skill-box{
+    border: 1px solid FloralWhite;
+    border-radius: 4%;
+}
+.skill-box:hover{
+    background-color:Gainsboro ;
+}
+
+/* Jobs Section  */
+.add-job-btn{
+    margin-left: 55%;
+    font-size: xx-large;
+}
+.add-job-btn:hover{
+    transform: scale(1.5);
+    color: black;
+}
+.comp-url{
+    margin-left: 80%;
+}
+
+.job-update{
+    margin-left: 90%;
+}
+.job-update,.job-delete{
+    color: rgb(79, 78, 78);
+}
+.job-update:hover{
+    transform: scale(1.5);
+    color: black;
+}
+.job-delete:hover{
+    transform: scale(1.5);
+    color: black;
+}
+
+/* Diplomes Section  */
+.add-dip-btn{
+    margin-left: 75%;
+    font-size: xx-large;
+}
+.add-dip-btn:hover{
+    transform: scale(1.5);
+    color: black;
+}

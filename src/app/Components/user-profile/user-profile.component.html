@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+
+<body class="w3-light-grey">
+
+    <app-header></app-header>
+
+    <!-- Page Container -->
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+    
+      <!-- The Grid -->
+      <div class="w3-row-padding">
+      
+        <!-- Left Column -->
+        <div class="w3-third">
+          <!-- Image / Name  -->
+          <div class="w3-white w3-text-grey w3-card-4">
+            <div class="w3-display-container">
+                @if (imageURL) {
+                    <img [src]="imageURL" style="width:100%" alt="Avatar">
+                }
+                @else {
+                    <img src="assets\images\defaultImage.JPG" style="width:100%" alt="Avatar">
+                }
+              <div class="w3-display-bottomleft w3-container w3-text-black">
+             <h2> {{accountDetails.firstName}}  {{accountDetails.lastName}}  </h2>
+
+
+              </div>
+            </div>
+        <!--  -->
+
+        <!-- user Details   -->
+            <div class="w3-container">
+              
+              <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i> {{accountDetails.title}}</p>
+              <p><i class="fa-solid fa-location-dot  fa-fw w3-margin-right w3-large w3-text-teal"></i>{{accountDetails.origine?.country}}  , {{accountDetails.origine?.city}} ,  {{accountDetails.origine?.city}}</p>
+              <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>{{accountDetails.email}} </p>
+              <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>  {{accountDetails.phone}} </p>
+              <p>   <i class="fa-solid fa-school  w3-margin-right w3-text-teal t w3-large "></i>  {{accountDetails.university}} </p>
+              <p>  <i class="fa-brands fa-linkedin  w3-margin-right w3-text-teal t w3-large"></i> <a [href]="accountDetails.linkedinURL"><i class="fa-solid fa-link"></i></a></p>
+              <p>  <i class="fas fa-laptop-code  w3-margin-right w3-text-teal t w3-large"></i> <a [href]="accountDetails.personalWesiteURL"> <i class="fa-solid fa-link"></i></a></p>
+              <p>  <i class="fa-brands fa-github  w3-margin-right w3-text-teal t w3-large"></i> <a [href]="accountDetails.protfolioURL"> <i class="fa-solid fa-link"></i></a></p>
+              @if (accountType=="User") { 
+                <!-- Enrollemnt Date - Graduation Date -->
+                <p>     <i class="fa-solid fa-graduation-cap fa-fw w3-margin-right w3-text-teal t w3-large"></i>{{accountDetails.promotion}} -  {{accountDetails.graduationDate}}</p>
+              }
+
+              <hr>
+
+              <!-- Skills  -->
+        
+              @if (accountType=="User") {
+                <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Compétences 
+                </b></p>
+   
+                <!-- Skils List  -->
+                @for (item of skills; track $index) {
+                    <div class="skill-box">
+
+                            <p>   {{item.name}}</p>
+                               
+                              
+
+                        <!-- Skil Level Bar  -->
+                        <div class="w3-light-grey w3-round-xlarge w3-small">
+                            <div class="w3-container w3-center w3-round-xlarge w3-teal"  [style.width.%]=" getSkillLevelPercentage(item.level)"> {{getSkillLevelPercentage(item.level)}}%</div>
+                        </div>
+                        <!--  -->
+
+                    </div>
+             
+                
+                }
+
+              }
+    
+    
+            </div>
+          </div><br>
+    
+        <!-- End Left Column -->
+        </div>
+    
+       <!-- end Lef Column -->
+
+
+
+
+
+        <!-- Right Column -->
+        <div class="w3-twothird">
+            <!--About   -->
+          <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <h2 class="w3-text-grey w3-padding-16">Description</h2>
+            <p> {{accountDetails.description}}</p>
+
+           </div>
+
+           <!-- Education  -->
+          @if (accountDetails.dtype=="User") {
+            <div class="w3-container w3-card w3-white">
+              <h2 class="w3-text-grey w3-padding-16"><i class="fa-solid fa-graduation-cap fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Diplômes     </h2>
+
+            @for (item of diplomas; track $index) {
+
+              <div class="w3-container">
+                          
+                <h3 class="w3-opacity"><b>{{item.universityName}}</b></h3>
+                <h3> {{item.diplomaType}} / {{item.studyField}}</h3>
+                <h3> <i class="fa fa-calendar fa-fw w3-margin-right "></i>{{item.enrollmenDate}}- 
+                @if(item.graduationDate){
+                  <span>{{item.graduationDate}}</span>
+
+                }@else {
+
+                    <span class="w3-tag w3-teal w3-round">Actuelle</span> 
+
+                }
+                </h3>
+
+                <h3><i class="fa-solid fa-location-dot"></i> <span>  {{item.universityLocation.country}} - {{item.universityLocation.region}} -  {{item.universityLocation.city}} </span></h3>
+
+                <hr>
+              </div>
+        
+            }
+   
+            </div>
+          }
+  
+        <!--End Education   -->
+
+          <br>
+
+   <!--Experience  -->
+             @if (accountDetails.dtype=="User") {
+              <div class="w3-container w3-card w3-white w3-margin-bottom">
+ 
+                <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> Expérience professionnelle         </h2>
+                @for (item of jobs; track $index) {
+                    <div class="w3-container">
+                 
+                        
+    
+    
+                        <h2 class="w3-opacity"><b>{{item.jobTitle }}  </b>
+                        </h2>
+                        <h3><i class="	fas fa-city fa-fw w3-margin-right "></i><span> {{item.companyName}} </span> <a class="comp-url" [href]="item.companyWebsiteURL"><i class="fa-solid fa-link"></i> </a>  </h3>
+                        <h3><i class="fa-solid fa-location-dot"></i> <span>  {{item.companyLocation.country}} - {{item.companyLocation.region}} -  {{item.companyLocation.city}} </span></h3>
+                        
+                        <h3> <i class="fa fa-calendar fa-fw w3-margin-right "></i>{{item.hireDate}}- 
+                        @if (item.quitDate) {
+                            <span>{{item.quitDate}}</span>
+                        }@else {
+                            <span class="w3-tag w3-teal w3-round">Actuelle</span> 
+                        }
+                    </h3>
+    
+                        <br>
+                        <hr>
+                      </div>
+                }
+              </div>
+             }
+    
+         <!--End Experience   -->
+
+
+    
+        <!-- End Right Column -->
+        </div>
+        
+      <!-- End Grid -->
+      </div>
+      
+      <!-- End Page Container -->
+    </div>
+    
+    
+    </body>
+    </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

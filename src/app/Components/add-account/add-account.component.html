@@ -1,0 +1,250 @@
+<app-header></app-header>
+<br>
+
+<form action="" [formGroup]="newAccountForm" (ngSubmit)="onSubmit()">
+    <!-- Account Type  -->
+    <div  [class.invalid]="
+     newAccountForm.get('accountType')?.invalid  &&
+     (newAccountForm.get('accountType')?.dirty ||newAccountForm.get('name')?.touched || isSubmited )" >
+    
+
+
+        <label for="accountType"> Type Compte : </label>
+        <input type="radio" value="Admin" name="accountType" formControlName="accountType" > <span>Admin</span>
+        <input type="radio"   value="User" name="accountType" formControlName="accountType"  > <span>User</span>
+        @if (  newAccountForm.get('accountType')?.invalid  &&
+               (newAccountForm.get('accountType')?.dirty ||newAccountForm.get('name')?.touched || isSubmited )  ) {
+                 <br>
+                <span class="error-message"> Ce champ est obligatoire </span>
+
+        }
+
+    </div>
+    <br>       
+    
+ 
+    <!-- Common Input Fields  --> 
+
+    <!-- First Name  -->
+
+    <label for="first-name"> Prénom  : </label>
+    <input type="text" name="first-name" id=""  formControlName="firstName"
+    [class.invalid]="
+     newAccountForm.get('firstName')?.invalid  &&
+     (newAccountForm.get('firstName')?.dirty ||newAccountForm.get('firstName')?.touched || isSubmited  ) " 
+    >
+    @if (  newAccountForm.get('firstName')?.invalid  &&
+    (newAccountForm.get('firstName')?.dirty ||newAccountForm.get('firstName')?.touched || isSubmited )  ) {
+      <br>
+     <span class="error-message"> Ce champ est obligatoire </span>
+
+    }
+
+
+    <br><br>
+    <!--  -->
+
+    <!-- Last Name  -->
+    <label for="last-name">Nom de famille : </label>
+    <input type="text" name="last-name" id=""   formControlName="lastName"  
+    [class.invalid]="
+    newAccountForm.get('lastName')?.invalid  &&
+    (newAccountForm.get('lastName')?.dirty ||newAccountForm.get('lastName')?.touched || isSubmited  ) " 
+    >
+
+    @if (  newAccountForm.get('lastName')?.invalid  &&
+    (newAccountForm.get('lastName')?.dirty ||newAccountForm.get('lastName')?.touched || isSubmited )  ) {
+      <br>
+     <span class="error-message"> Ce champ est obligatoire </span>
+
+    }
+    <br><br>
+    <!--  -->
+
+    <!--Email   -->
+    <label for="email">Email : </label>
+    <input type="email" name="email" id=""   formControlName="email" 
+
+    [class.invalid]="
+    newAccountForm.get('email')?.invalid  &&
+    (newAccountForm.get('email')?.dirty ||newAccountForm.get('email')?.touched || isSubmited  ) " 
+    >
+
+    @if (  newAccountForm.get('email')?.hasError("required")  &&
+    (newAccountForm.get('email')?.dirty ||newAccountForm.get('email')?.touched || isSubmited )  ) {
+      <br>
+     <span class="error-message"> Ce champ est obligatoire </span>
+
+    }
+    @if (  !newAccountForm.get('email')?.hasError("required")  &&  newAccountForm.get('email')?.invalid &&
+    (newAccountForm.get('email')?.dirty ||newAccountForm.get('email')?.touched || isSubmited )  ) {
+      <br>
+     <span class="error-message"> Format d'email invalide </span>
+
+    }
+    <br><br>
+    <!--  -->
+
+    <!-- Pass Word   -->
+    <label for="pass-word">Mot de passe  : </label>
+    <input type="password" name="pass-word" id=""    formControlName="password" 
+    [class.invalid]="
+    newAccountForm.get('password')?.invalid  &&
+    (newAccountForm.get('password')?.dirty ||newAccountForm.get('password')?.touched || isSubmited  ) " 
+    >
+
+    @if (  newAccountForm.get('password')?.hasError("required")  &&
+    (newAccountForm.get('password')?.dirty ||newAccountForm.get('password')?.touched || isSubmited )  ) {
+      <br>
+     <span class="error-message"> Ce champ est obligatoire </span>
+
+    }
+    @if (  !newAccountForm.get('password')?.hasError("required")  &&  newAccountForm.get('password')?.invalid &&
+    (newAccountForm.get('password')?.dirty ||newAccountForm.get('password')?.touched || isSubmited )  ) {
+      <br>
+     <span class="error-message">  la longueur minimale du mot de passe est de 8</span>
+
+    }
+    <br><br>
+
+    <!--  -->
+
+    <!-- Tel  -->
+
+    <label for="phone"> Numéro de téléphone : </label>
+    <input type="tel" name="phone" id=""     formControlName="phone"  
+    [class.invalid]="
+    newAccountForm.get('phone')?.invalid  &&
+    (newAccountForm.get('phone')?.dirty ||newAccountForm.get('phone')?.touched || isSubmited  ) " 
+    >
+
+    
+    @if (  newAccountForm.get('phone')?.invalid  &&
+    (newAccountForm.get('phone')?.dirty ||newAccountForm.get('phone')?.touched || isSubmited )  ) {
+      <br>
+     <span class="error-message"> Ce champ est obligatoire </span>
+
+    }
+    <br><br>
+    <!--  -->
+    
+    <!-- Birth Date  -->
+    <label for="birth-date">Date de naissance : </label>
+    <input type="date" name="birth-date" id=""   formControlName="birthDate" 
+    [class.invalid]="
+    newAccountForm.get('birthDate')?.invalid  &&
+    (newAccountForm.get('birthDate')?.dirty ||newAccountForm.get('birthDate')?.touched || isSubmited  ) " 
+    >
+
+    @if (  newAccountForm.get('birthDate')?.invalid  &&
+    (newAccountForm.get('birthDate')?.dirty ||newAccountForm.get('birthDate')?.touched || isSubmited )  ) {
+      <br>
+     <span class="error-message"> Ce champ est obligatoire </span>
+
+    }
+    <br><br>
+   <!--  -->
+
+   <!-- Genre  -->
+    <div
+    [class.invalid]="
+    newAccountForm.get('genre')?.invalid  &&
+    (newAccountForm.get('genre')?.dirty ||newAccountForm.get('genre')?.touched || isSubmited  ) " 
+    >
+        <label for="sex"> Genre  : </label>
+        <input type="radio"   value="Male" name="genre"  formControlName="genre"> <span>Male</span>
+        <input type="radio"   value="Female" name="genre"   formControlName="genre"> <span>Female</span>
+
+        @if (  newAccountForm.get('genre')?.invalid  &&
+        (newAccountForm.get('genre')?.dirty ||newAccountForm.get('genre')?.touched || isSubmited )  ) {
+          <br>
+         <span class="error-message"> Ce champ est obligatoire </span>
+    
+        }
+    </div>
+    <br><br>
+    <!--  -->
+
+    <!-- Origine  -->
+    <label for="origin"> origine  : </label>
+
+    <select name="origin"    formControlName="origin" 
+    [class.invalid]="
+    newAccountForm.get('origin')?.invalid  &&
+    (newAccountForm.get('origin')?.dirty ||newAccountForm.get('origin')?.touched || isSubmited  ) " 
+    >
+        
+     
+        @for (item of locations; track $index) {
+            <option   name="origin" [value]="item.id"  > {{item.country}} -  {{item.region}}- {{item.city}}</option>
+        }
+         
+      </select>
+      @if (  newAccountForm.get('origin')?.invalid  &&
+      (newAccountForm.get('origin')?.dirty ||newAccountForm.get('origin')?.touched || isSubmited )  ) {
+        <br>
+       <span class="error-message"> Ce champ est obligatoire </span>
+  
+      }
+    <br><br>
+    <!--  -->
+
+
+
+    
+    <!--  Specific User Input Fields -->
+    
+ 
+    @if (newAccountForm.get("accountType")?.value =="User") {
+        
+        <!-- Enrollment Date  -->
+        <label for="enrollmentDate">Date d'inscription            : </label>
+        <input type="date" name="enrollmentDate" id=""   formControlName="enrollmentDate" 
+        [class.invalid]="
+        newAccountForm.get('enrollmentDate')?.invalid  &&
+        (newAccountForm.get('enrollmentDate')?.dirty ||newAccountForm.get('enrollmentDate')?.touched || isSubmited  ) " 
+        >
+
+        @if (  newAccountForm.get('enrollmentDate')?.invalid  &&
+        (newAccountForm.get('enrollmentDate')?.dirty ||newAccountForm.get('enrollmentDate')?.touched || isSubmited )  ) {
+          <br>
+         <span class="error-message"> Ce champ est obligatoire </span>
+    
+        }
+        <br><br>
+       <!--  -->
+       
+       <!-- GraduationDate  -->
+       <label for="graduationDate"   > Date d'obtention du diplôme   : </label>
+        <input type="date" name="graduationDate" id="" formControlName="graduationDate"  >
+        <br><br>
+       <!--  -->
+
+       <!-- Type Bac  -->
+        <label for="bacType">  Type Bac   : </label>
+        <select name="bacType" formControlName="bacType" 
+        [class.invalid]="
+        newAccountForm.get('bacType')?.invalid  &&
+        (newAccountForm.get('bacType')?.dirty ||newAccountForm.get('bacType')?.touched || isSubmited  ) " 
+        >
+            <option   name="bacType"  value="Scientifique" >Scientifique</option>
+            <option   name="bacType"  value="Littéraire" >Littéraire</option>
+            <option   name="bacType"  value="Economique et sociale" >Economique et sociale</option>
+            <option   name="bacType"  value="Sportif" >Sportif</option>
+          </select>
+          
+        @if (  newAccountForm.get('bacType')?.invalid  &&
+        (newAccountForm.get('bacType')?.dirty ||newAccountForm.get('bacType')?.touched || isSubmited )  ) {
+          <br>
+         <span class="error-message"> Ce champ est obligatoire </span>
+    
+        }
+          <br><br>
+
+    }
+
+     <br><br>
+
+    <input type="submit"  value="Créer" > 
+</form>
+

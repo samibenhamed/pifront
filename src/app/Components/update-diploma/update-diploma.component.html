@@ -1,0 +1,79 @@
+<app-header></app-header>
+<br>
+<form action="" [formGroup]="addDiplomaFormGroup" (ngSubmit)="onSubmit()"  >
+
+    <!-- University Name :  -->
+    <label for="universityName"> Nom de l'université    </label>
+    <input type="text" name="" id="" formControlName="universityName"   [class.invalid]="hasRequiredError('universityName')" >
+    <br>
+    @if (hasRequiredError('universityName')) {<span class="error-message">   Ce champ est obligatoire !     </span> <br> }
+    <!--  -->
+
+    <!--  Domaine  -->
+    <div  [class.invalid]="  invalidStudyField()"  >
+    <label for="studyField"  > Domaine :</label>
+
+        <select name="studyField" id="" formControlName ="studyField"  >
+            <option value="Data Science"> Data Science </option>
+            <option value="Business Analytics"> Business Analytics </option>
+            <option value="Business Intelligence">Business Intelligence </option>
+            <option value="software developments"> software developments</option>
+            <option value="DevOps">DevOps </option>
+            <option value="Cloud/BigData">Cloud/BigData</option>
+            <option value="Cyber Security">Cyber Security</option>
+            <option value="Digital Management & Information Systems - MDSI"> Digital Management & Information Systems - MDSI</option>
+            <option value="Autre"> Autre </option>
+
+
+        </select>
+        @if (addDiplomaFormGroup.get('studyField')?.value =='Autre' ) {
+            <input type="text" name="otherStudyField" id=""   formControlName="otherStudyField">
+        }
+        <br>
+        @if (invalidStudyField()) {<span class="error-message">   Ce champ est obligatoire !     </span> <br> }
+    </div>
+    <!--  -->
+    
+    
+    <!--  Type Diplome -->
+    <label for="diplomaType">Type : </label>
+    <select name="diplomaType" id="" formControlName="diplomaType" [class.invalid]="hasRequiredError('diplomaType')"  >
+        <option value="Mastere" > Mastère</option>
+        <option value="Cycle d'ingenierie" > Cycle d'ingénierie </option>
+        <option value="licence" > licence</option>
+
+        
+    </select>
+    <br>
+    @if (hasRequiredError('diplomaType')) {<span class="error-message">   Ce champ est obligatoire !     </span> <br> }
+    <!--  -->
+
+    <!-- Enrollemnt Date  :  -->
+     <label for="enrollmenDate"> Date d'inscription : </label>
+     <input type="date" name="" id="" formControlName="enrollmenDate"   [class.invalid]="hasRequiredError('enrollmenDate')" >
+     <br>
+     @if (hasRequiredError('enrollmenDate')) {<span class="error-message">   Ce champ est obligatoire !     </span> <br> }
+    <!--  -->
+
+    <!-- Graduation Date  -->
+    <label for="graduationDate"> Date d'obtention du diplôme : </label>
+    <input type="date" name="graduationDate" id="" formControlName="graduationDate"   [class.invalid]="invalidGraduationDate() " >
+    <br>
+    @if (invalidGraduationDate()) {<span class="error-message">   La Date d'obtention du diplôme  Ne peut être antérieure à la date d'inscription ! </span> <br> }
+ 
+ 
+    <!--  University Location -->
+    <label for=""> University Location : </label>
+    <select name="universityLocationId" id="" formControlName="universityLocationId"    [class.invalid]="hasRequiredError('universityLocationId') " > 
+    
+            @for (item of locations; track $index) {
+                <option [value]="item.id" >{{item.country}} - {{item.region}} {{item.city}} </option>
+            }
+   </select>
+    <br>
+     @if (hasRequiredError('universityLocationId')) {<span class="error-message">   Ce champ est obligatoire !     </span> <br> }
+    <!--  -->
+    
+    <br>
+    <input type="submit" name="" id="">
+</form>

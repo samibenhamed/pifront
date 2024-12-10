@@ -1,0 +1,28 @@
+<mat-dialog-content>
+    @if (imageURL) {
+        <img [src]="imageURL" alt="" >
+
+    }@else {
+        <img src="assets\images\defaultImage.JPG" alt="" >
+
+    }
+<form action="">
+    <input type="file" (change)="onFileSelecte($event)">
+    @if(invalidFileType){
+        <span class="error-message"> this image file type is Not Valid . type must be jpg, jpeg, or png</span>
+    }
+    @if (fileToLarge) {
+        <span class="error-message"> Le fichier est trop gros. la taille maximale autorisée du fichier est de 1 Go </span>
+
+    }
+</form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Fermer</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="onClick()"  [hidden]="invalidFileType || fileToLarge ">Ok</button>
+  @if(hasImage){
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="onDelete()">Supprimer</button>
+
+  }
+
+</mat-dialog-actions>

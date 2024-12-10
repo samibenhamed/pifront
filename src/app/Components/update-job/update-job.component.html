@@ -1,0 +1,126 @@
+<app-header></app-header>
+<br>
+<form action="" [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+
+    <!-- Company Name  -->
+    <label for="companyName">Nom de l'entreprise </label>
+    <input type="text" name="companyName" formControlName="companyName" [class.invalid]="hasRequiredError('companyName')" > <br>
+    @if(hasRequiredError ('companyName') )  { <span class="error-message">         Ce champ est obligatoire ! <br>  </span> }
+    <!--  -->
+
+    <!-- Company Besite URL  -->
+    <label for="companyWebsiteURL">URL du site Web de l'entreprise </label>
+    <input type="text" name="companyWebsiteURL" formControlName="companyWebsiteURL" > <br>
+    <!--  -->
+
+    <!-- companySector  -->
+    <div [class.invalid]="invalidCompanySector()" >
+        <label for="companySector"> secteur de l'entreprise : </label>
+        <select name="companySector" id=""   formControlName="companySector" >
+            <option  name="companySector"  value="Informatique et Technologie">	Informatique et Technologie</option>
+            <option  name="companySector"  value="Santé et Sciences de la Vie">	 Santé et Sciences de la Vie</option>
+            <option  name="companySector"  value="Ingénierie">	 Ingénierie</option>
+            <option  name="companySector"  value="Finance et Comptabilité">	 Finance et Comptabilité</option>
+            <option  name="companySector"  value="Énergie et Environnement">	 Énergie et Environnement</option>
+            <option  name="companySector"  value="Vente et Marketing">	 Vente et Marketing</option>
+            <option  name="companySector"  value="banque et assurance ">	   banque et assurance </option>
+            <option  name="companySector"  value="Autre">Autre  </option>
+        </select>
+
+        @if (jobForm.get('companySector')?.value  =="Autre" ) {
+            <input type="text" name="otherCompanySector" id=""   formControlName="otherCompanySector"   >
+        }
+        <br>
+    @if(  invalidCompanySector())  { <span class="error-message">         Ce champ est obligatoire ! <br>  </span> }
+    </div>
+    <!-- Company Location -->
+    <label for="companyLocationId">Emplacement de la société : </label>
+    <select name="companyLocationId" id=""  formControlName="companyLocationId" [class.invalid]="hasRequiredError('companyLocationId')"  >
+        @for (item of locations; track $index) {
+            <option [value]="item.id"> {{item.country}} -{{item.region}}  - {{item.city}}  </option>
+        }
+    </select>
+    @if(hasRequiredError ('companyLocationId') )  { <span class="error-message">         Ce champ est obligatoire ! <br>  </span> }
+
+
+
+
+    <!-- Job Field  -->
+    <div [class.invalid] = " invalidJobField() " >
+        <label for="jobField"> domaine du poste </label>
+        <select name="jobField" id="" formControlName="jobField">
+            <option value="Developpement Informatique"> Developpement Informatique </option>
+            <option value="Developpement Systemes d'informations"> Developpement Systemes d'informations</option>
+            <option value="Business Intelligence"> Business Intelligence   </option>
+            <option value="Data Science"> Data Science </option>
+
+            <option value="Management"> Management</option>
+            <option value="Marketing Digital"> Marketing Digital </option>
+            <option value="Cyber Security"> Cyber Security </option>
+            <option value="Finance et Comptabilité"> Finance et Comptabilité</option>
+            <option value="Relations Client"> Relations Client</option>
+            <option value="Production"> Production  </option>
+            <option value="Autre"> Autre</option>
+        </select>
+        @if (jobForm.get('jobField')?.value  =="Autre" ) {
+            <input type="text" name="otherJobField" id=""   formControlName="otherJobField"   >
+        }
+        <br>
+    @if(  invalidJobField())  { <span class="error-message">         Ce champ est obligatoire ! <br>  </span> }
+    </div>
+    <!--  -->
+
+    <!--  jobTitle -->
+    <label for="jobTitle">titre de poste   : </label>
+    <input type="text" name="jobTitle" formControlName="jobTitle" [class.invalid]="hasRequiredError('jobTitle')"> <br>
+    @if(hasRequiredError ('jobTitle') )  { <span class="error-message">         Ce champ est obligatoire ! <br>  </span> }
+    <!--  -->
+
+
+
+    <!-- Hire Date  -->
+    <label for="hireDate">Date d'embauche : </label>
+    <input type="date" name="hireDate" formControlName="hireDate" [class.invalid]=" hasRequiredError('hireDate') " > <br>
+    @if(hasRequiredError ('hireDate') )  { <span class="error-message">         Ce champ est obligatoire ! <br>  </span> }
+    <!--  -->
+
+    <!-- Quit Date  -->
+    <label for="quitDate">date de fin : </label>
+    <input type="date" name="quitDate" formControlName="quitDate" [class.invalid]="invalidQuitDate () " > <br>
+    @if( invalidQuitDate () )  { <span class="error-message">la date de fin ne peut pas être antérieure à la date d'embauche ! <br>  </span> }
+    <!--  -->
+
+    <!-- Salary  -->
+    <label for="salary">salaire : </label>
+    <input type="number" name="salary" formControlName="salary" [class.invalid]=" hasMinError('salary') || hasRequiredError('salary')"> <br>
+    @if(hasRequiredError ('salary') )  { <span class="error-message">         Ce champ est obligatoire ! <br>  </span> }
+    @if( hasMinError ('salary') )  { <span class="error-message"> ce champ ne peut pas être négatif !   <br> </span> }
+    <!--  -->
+    
+    <!-- Salary Currency  -->
+    <label for="salaryCurrency">devise du salaire  </label>
+    <select name="salaryCurrency" id=""   formControlName="salaryCurrency"  [class.invalid]=" hasRequiredError('hireDate') ">
+
+        <option name="salaryCurrency" value="DT">Dinar tunisien</option>
+        <option  name="salaryCurrency" value="EURO">Euro</option>
+
+    </select>
+    <br>
+    @if(hasRequiredError ('salaryCurrency') )  { <span class="error-message">         Ce champ est obligatoire ! <br>  </span> }
+
+    
+    <!--  Nb Applications -->
+    <label for="nbApplications">Nombre de demandes  : </label>
+    <input type="number" name="nbApplications" formControlName="nbApplications" [class.invalid]=" hasMinError('nbApplications') || hasRequiredError('nbApplications')"> <br>
+    @if(hasRequiredError ('nbApplications') )  { <span class="error-message">         Ce champ est obligatoire ! <br>  </span> }
+    @if( hasMinError ('nbApplications') )  { <span class="error-message"> ce champ ne peut pas être négatif !   <br> </span> }
+
+    <!-- Nb Refused Applications  -->
+    <label for="nbRefusedApplications">Nombre de demandes refusées : </label>
+    <input type="number" name="nbRefusedApplications" formControlName="nbRefusedApplications" [class.invalid]=" hasMinError('nbRefusedApplications') || hasRequiredError('nbRefusedApplications')"> <br>
+    @if(hasRequiredError ('nbRefusedApplications') )  { <span class="error-message">         Ce champ est obligatoire ! <br>  </span> }
+    @if( hasMinError ('nbRefusedApplications') )  { <span class="error-message"> ce champ ne peut pas être négatif !   <br> </span> }
+     <!--  -->
+    <br>
+    <input type="submit" value="Changer">
+</form>

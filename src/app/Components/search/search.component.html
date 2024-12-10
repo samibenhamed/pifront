@@ -1,0 +1,204 @@
+<app-header></app-header>
+
+
+<br>
+
+<div class="search-section">
+
+
+<form action="" [formGroup]="searchForm" (ngSubmit)="setSearchKey()" class="search-form">
+    <input type="text"  formControlName="searchKey">
+    <input type="submit" name="" id="" value="search">
+    <button (click)="filter()"> Filtre</button>
+    @if (
+        userType=='Admin'
+    ) {
+
+        <button (click)="addUser()"> ajouter un compte</button>
+    }
+    <br>
+</form>
+</div>
+
+
+<div class="filter-box" [hidden]="hideFiltter">
+    <!-- Search  -->
+    <!-- User Type -->
+    <br>
+    <div class="filter-section">
+        <label for="accountType"> Type Compte : </label>
+        <input type="radio" name="accountType" id="accountType" value="all"  [(ngModel)]="selectedAccountType"  > <span>Tout </span>
+        <input type="radio" name="accountType" id="accountType"  value="User" [(ngModel)]="selectedAccountType" > <span>User</span>
+        <input type="radio" name="accountType" id="accountType"  value="Admin"  [(ngModel)]="selectedAccountType"> <span>Admin</span>
+    </div>
+
+    <!-- Promotion  -->
+    <div class="filter-section">
+        <label for="promotion">Promotion : </label>
+        <select name="promotion" id="" [(ngModel)]="selectedPromotion">
+            <option value="all"> Tout</option>
+            <option value="2020"> 2020</option>
+            <option value="2021"> 2021</option>
+            <option value="2022"> 2022</option>
+            <option value="2023"> 2023</option>
+            <option value="2024"> 2024</option>
+        </select>
+
+    </div>
+    <!-- University  -->
+    <div class="filter-section">
+        <label for="">Université</label>
+        <input type="radio"  value="all" [(ngModel)]="selectedUinivesity"> <span>Tout</span>
+        <input type="radio"  value="ESB" [(ngModel)]="selectedUinivesity"> <span>ESB</span>
+        <input type="radio"  value="UCBL" [(ngModel)]="selectedUinivesity"> <span>UCBL</span>
+
+    </div>
+    <!-- Origine  -->
+    <div class="filter-section">        <label for=""> Origine : </label>
+        <select name="origine" id="" [(ngModel)]="selectedOrigine">
+            <option  name="origine" value="all">Tout</option>
+            @for (item of locations; track $index) {
+                <option name="origine" [value]="item.id"> {{item.country}} -{{item.region}}  - {{item.city}}  </option>
+            }
+        </select>
+    </div>
+
+    <br>
+    <!-- Skills  -->
+    <div class="filter-section ">
+          
+        <form action="" [formGroup]="skillForm" (ngSubmit)="addToSelectedSkills()" >
+            <label for="">Compétence : </label>
+            <input type="text" formControlName="name">
+            <input type="submit" value="Ajouter" >
+        </form>
+        <br>
+        <div class="skills-box">
+            @for (skill of selectedSkills; track $index) {
+                <p class="skill">  {{skill}}  <button  (click)="removeSkill(skill)">x</button></p>               
+            }
+    
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+<!-- Satisfaction Level  -->
+    @if ( userSatisfactionLevel==0  && userType=="User" ) {
+    
+            <form action="" [formGroup]="stisfactionFormRegister" (ngSubmit)="onSubmitSatisfaction()"  class="satisfaction-form">
+
+                
+                <p>Veuillez prendre un moment pour nous faire savoir à quel point vous êtes satisfait du formation SIAD.</p>     
+                <input type="radio" value="1" formControlName="satisfactionLeve"> <span>1 </span>
+                <input type="radio" value="2" formControlName="satisfactionLeve"> <span>2</span>
+                <input type="radio" value="3" formControlName="satisfactionLeve"> <span>3 </span>
+                <input type="radio" value="4" formControlName="satisfactionLeve"> <span>4 </span>
+                <input type="radio" value="5" formControlName="satisfactionLeve"> <span>5 </span>
+    
+    
+                <br>
+                <input type="submit" name="" id="">
+            </form>
+        
+    
+    }
+    
+
+
+<!-- Accounts  -->
+
+
+
+<!-- <div class="accounts-box"> -->
+<br>
+<div class="cards-box">
+
+<mat-grid-list cols="4" rowHeight="2:2" [gutterSize]="'20px'" >
+
+    @for (item of transformedAccounts; track $index) {
+
+        <!-- {{item}}  -->
+        @if (hasSelectedSkills(item.skills)   
+             && hasSelectedAccountType(item.dtype) && 
+             hasSelectedPromotion(item.promotion) 
+             && hasSelectedUniversity(item.university) &&
+             hasSelectedOrigine(item.origine.id) && 
+             hasSearchKey(item.firstName , item.lastName)
+   
+             ) {
+
+
+                <mat-grid-tile>
+                   <mat-card class="card">
+                  
+                      <mat-card-header>
+                      <div mat-card-avatar >
+                        @if (item.imageURL) {
+                            <img mat-card-image src="{{item.imageURL}}" alt="user image"  class="head-img">
+          
+                          }@else {
+                            <img mat-card-image  src="assets\images\defaultImage.JPG" alt="user image"  class="head-img">
+          
+                          }
+
+                      </div>
+                        <mat-card-title> {{item.firstName}} {{item.lastName}} </mat-card-title>
+                        <mat-card-subtitle> {{item.title}}</mat-card-subtitle>
+
+                       </mat-card-header>
+                    
+    <mat-card-content>
+
+                <p>   <span class="card-title"> Université : </span>{{item.university}} </p>
+                <p>  <span class="card-title">   Origine:  </span> {{item.origine.country}} - {{item.origine.region}} - {{item.origine.city}} </p>
+                @if (item.dtype=="User") {
+                    <p>  <span class="card-title">  Promotion : </span>  {{getPromotion(item.promotion)}} </p> 
+                    <p>  <span class="card-title">  Compétences :</span>
+                    
+                    <div class="skills-box">
+
+               <br>
+
+                        @for (skill of item.skills ; track $index) {
+                            <p class="skill">  {{skill}}</p>
+                           
+
+
+                        }
+    
+                    </div>
+ 
+                }
+    </mat-card-content>
+
+
+
+    <mat-card-actions>
+
+
+                @if (userType=="Admin" )  {
+                    <button mat-button (click)=" deleteAccount(item.id)" class="delete-button">supprimer</button>
+                }
+                <button mat-button (click)=viewProfile(item.id)  class="view-profile-button">Voir profil</button>
+
+            <!-- </div> -->
+
+            </mat-card-actions>
+
+        </mat-card>
+
+        </mat-grid-tile>
+            <!-- </div> -->
+        }
+
+    }
+
+  </mat-grid-list>
+
+</div>
+<!-- </div> -->

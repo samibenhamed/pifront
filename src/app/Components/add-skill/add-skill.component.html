@@ -1,0 +1,24 @@
+<mat-dialog-content>
+    <form action="" [formGroup]="skillForm" (ngSubmit)="onSubmit()">
+
+        <label for="name"> Nom :  </label>
+
+        <input type="text" formControlName="name" name="name" >
+        <br>
+        <label for="level"> Niveau :  </label>
+        <input type="radio" value="1" name="level"  formControlName="level" > <span>1 </span>
+        <input type="radio" value="2" name="level"  formControlName="level" > <span>2 </span>
+        <input type="radio" value="3" name="level"  formControlName="level" > <span>3 </span>
+        <input type="radio" value="4" name="level"  formControlName="level" > <span>4 </span>
+        <input type="radio" value="5" name="level"  formControlName="level" > <span>5 </span>
+        <br>
+        @if (skillForm.valid==true) {
+            <input mat-button mat-dialog-close  type="submit"  value="ajouter" class="add">
+        }
+        <button mat-button mat-dialog-close>Fermer</button>
+
+    </form>
+
+
+</mat-dialog-content>
+

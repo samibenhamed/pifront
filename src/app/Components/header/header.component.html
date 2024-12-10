@@ -1,0 +1,13 @@
+
+<div class="nav-container">
+    <div>
+        <a [routerLink]="['/search']" routerLinkActive="activeLink" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a [routerLink]="['/profile']" routerLinkActive="activeLink" [routerLinkActiveOptions]="{exact: true}">Profile</a>
+        @if (userType=="Admin") {
+            <a [routerLink]="['/dashboard']" routerLinkActive="activeLink" [routerLinkActiveOptions]="{exact: true}">DashBoard</a>
+
+
+        }
+    </div>
+    <button (click)="logOut()">LogOut</button>
+</div>
